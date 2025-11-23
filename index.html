@@ -12,7 +12,7 @@
         <h1>Blockley Lodge</h1>
         <h4>Of Antient, Free and Accepted Masons, N. 6245, Oxford</h4>
         <h2>W Bro. Dr Daniel Antonio Villar Maldonado, Worshipful Master </h2>
-        <p class="left">Dear Sir and Brother,<br>By command of the Worshipful Master, I hereby summon and invite you to attend the next regular meeting of the Blockley Lodge, to be held at: Cardinal House, OX44 9LT on <strong>Saturday 15th November 2025 at noon.</strong><br>
+        <p class="left">Dear Sir and Brother,<br>By command of the Worshipful Master, I hereby summon and invite you to attend the next regular meeting of the Blockley Lodge, to be held at: Cardinal House, OX44 9LT on <strong><span id="meeting-date"></span> at noon.</strong><br>
         Yours faithfully and fraternally,<br>
             W. Bro. Matthew Standage ProvGPurs, Secretary<br>
             <a href="mailt0:secretary@blockleylodge.org.uk">secretary@blockleylodge.org.uk</a>
@@ -29,7 +29,7 @@
         </ol>
 <p><em>Dress: dark or morning suit, undress reglia</em></p>
 
-        <p><strong>Dining:</strong> Please use this <a href="https://dining.blockleylodge.org.uk">booking form</a> (deadline Saturday 1st February).</p>
+        <p><strong>Dining:</strong> Please use this <a href="https://dining.blockleylodge.org.uk">booking form</a> (deadline <span id="booking-deadline"></span></p>
 
 <p class="psmall">Alms will be collected at dinner via the Lodge <a href="https://gtap.uk/L6345">Relief Chest</a>. Electronic donations are preferred.</p>
     
@@ -45,5 +45,71 @@
 <p><a href="https://officers.blockleylodge.org.uk">Lodge Officers</a> | <a href="https://mobile.portal.ugle.org.uk/auth/login">UGLE Portal</a> | <a href="https://links.blockleylodge.org.uk">Useful Links</a> | <a href="https://friends.blockleylodge.org.uk">Join our mailing list</a></p>
 
     </main>
+
+        <script>
+  function getNextMeetingDate(today = new Date()) {
+    const year = today.getFullYear();
+
+    // Meeting rules
+    const meetingSpecs = [
+      { month: 1,  ordinal: 2 },      // February (2nd Saturday)
+      { month: 2,  ordinal: 2 },      // March (2nd Saturday)
+      { month: 6,  ordinal: 'last' }, // July (Last Saturday)
+      { month: 9,  ordinal: 3 },      // October (3rd Saturday)
+      { month: 10, ordinal: 3 }       // November (3rd Saturday)
+    ];
+
+    // Finds the Nth (or last) Saturday in a month
+    function getNthSaturday(year, month, order) {
+      const saturdays = [];
+      const date = new Date(year, month, 1);
+
+      while (date.getMonth() === month) {
+        if (date.getDay() === 6) {
+          saturdays.push(new Date(date));
+        }
+        date.setDate(date.getDate() + 1);
+      }
+
+      return order === "last"
+        ? saturdays[saturdays.length - 1]
+        : saturdays[order - 1];
+    }
+
+    // Collect valid upcoming meetings for the current year
+    const meetingDates = meetingSpecs
+      .map(spec => getNthSaturday(year, spec.month, spec.ordinal))
+      .filter(date => date >= today);
+
+    // If none remain this year, next meeting is next year's February (2nd Saturday)
+    if (meetingDates.length === 0) {
+      return getNthSaturday(year + 1, 1, 2);
+    }
+
+    // Otherwise return the earliest upcoming meeting
+    return meetingDates.sort((a, b) => a - b)[0];
+  }
+
+  const nextMeeting = getNextMeetingDate();
+
+  // Booking deadline = 7 days before meeting
+  const bookingDeadline = new Date(nextMeeting);
+  bookingDeadline.setDate(bookingDeadline.getDate() - 7);
+
+  const options = {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  };
+
+  document.getElementById("meeting-date").textContent =
+    nextMeeting.toLocaleDateString(undefined, options);
+
+  document.getElementById("booking-deadline").textContent =
+    bookingDeadline.toLocaleDateString(undefined, options);
+</script>
+
+        
     </body>
 </html>
