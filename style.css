@@ -53,7 +53,7 @@ body {
   font-optical-sizing: auto;
   font-style: normal;
     text-align: center;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 p {
@@ -116,7 +116,6 @@ a {
 
 main {
     max-width: 190mm;
-    max-height: 287mm;
     border: 1px solid #A39B89;  
     padding: 10mm;
     margin-left: auto;
@@ -143,5 +142,9 @@ p.royal-arch {
 	main {
 		border: none;
 		padding: 0:
+	}
+
+	body {
+		font-size: 14px;
 	}
 }
