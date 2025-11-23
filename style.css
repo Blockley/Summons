@@ -58,7 +58,7 @@ body {
 
 p {
     margin-top: 1em;
-    line-height: 1.5em;
+    line-height: 1.25em;
 }
 
 p.left {
@@ -112,6 +112,7 @@ ol li {
     margin: 0.50em;
     text-align: left;
     list-style:  decimal;
+	line-height: 1.25em;
 }
 
 a {
