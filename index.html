@@ -46,8 +46,19 @@
 
     </main>
 
-        <script>
+  <div>
+  <h2>Next Meeting</h2>
+  <p id="meeting-date"></p>
+
+  <h3>Booking Deadline</h3>
+  <p id="booking-deadline"></p>
+</div>
+
+<script>
   function getNextMeetingDate(today = new Date()) {
+    // Normalize "today" to midnight so comparisons work correctly
+    today.setHours(0, 0, 0, 0);
+
     const year = today.getFullYear();
 
     // Meeting rules
@@ -66,7 +77,10 @@
 
       while (date.getMonth() === month) {
         if (date.getDay() === 6) {
-          saturdays.push(new Date(date));
+          // Store midnight-normalized date
+          const d = new Date(date);
+          d.setHours(0, 0, 0, 0);
+          saturdays.push(d);
         }
         date.setDate(date.getDate() + 1);
       }
@@ -76,17 +90,17 @@
         : saturdays[order - 1];
     }
 
-    // Collect valid upcoming meetings for the current year
+    // Collect all meetings this year
     const meetingDates = meetingSpecs
       .map(spec => getNthSaturday(year, spec.month, spec.ordinal))
-      .filter(date => date >= today);
+      .filter(date => date >= today); // NOW includes today properly
 
-    // If none remain this year, next meeting is next year's February (2nd Saturday)
+    // If none left this year, choose next Feb (2nd Saturday)
     if (meetingDates.length === 0) {
       return getNthSaturday(year + 1, 1, 2);
     }
 
-    // Otherwise return the earliest upcoming meeting
+    // Return earliest meeting (today included if it's meeting day)
     return meetingDates.sort((a, b) => a - b)[0];
   }
 
@@ -96,6 +110,7 @@
   const bookingDeadline = new Date(nextMeeting);
   bookingDeadline.setDate(bookingDeadline.getDate() - 7);
 
+  // Options without year
   const options = {
     weekday: 'long',
     month: 'long',
@@ -107,8 +122,6 @@
 
   document.getElementById("booking-deadline").textContent =
     bookingDeadline.toLocaleDateString(undefined, options);
-</script>
-
-        
+</script>        
     </body>
 </html>
