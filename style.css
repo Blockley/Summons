@@ -134,6 +134,7 @@ img.logo  {
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 1em;
+	margin-top: 0;
 }
 
 p.royal-arch {
@@ -146,6 +147,7 @@ p.royal-arch {
 	main {
 		border: none;
 		padding: 0:
+		margin: 0;
 	}
 
 	body {
