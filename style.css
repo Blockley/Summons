@@ -55,7 +55,6 @@ body {
   font-style: normal;
     text-align: center;
     font-size: 14px;
-	padding: 10mm 0;
 }
 
 p {
@@ -123,6 +122,8 @@ main {
     padding: 10mm;
     margin-left: auto;
     margin-right: auto;
+	margin-top: 10mm;
+	margint-bottom: 10mm;
 }
 
 img.logo  {
