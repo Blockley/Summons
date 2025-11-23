@@ -139,3 +139,10 @@ p.royal-arch {
     border: 1px solid #af1600;
     padding: 1em;
 }
+
+@media print {
+	main {
+		border: none;
+		padding: 0:
+	}
+}
