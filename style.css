@@ -160,4 +160,9 @@ p.memoriam {
 	body {
 		font-size: 12px;
 	}
+
+	p.footer-links {
+	display: none;
+	}
+	
 }
