@@ -145,6 +145,11 @@ p.royal-arch {
     padding: 1em;
 }
 
+p.memoriam {
+	border: 1px solid black;
+    padding: 1em;
+}
+
 @media print {
 	main {
 		border: none;
