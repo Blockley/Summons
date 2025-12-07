@@ -150,7 +150,7 @@ p.memoriam {
     padding: 1em;
 }
 
-@media (min-width: 190mm) {
+@media (max-width: 190mm) {
 
 main {
  	border: none;
