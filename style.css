@@ -150,6 +150,14 @@ p.memoriam {
     padding: 1em;
 }
 
+@media (min-width: 190mm) {
+
+main {
+ 	border: none;
+}
+	
+}
+
 @media print {
 	main {
 		border: none;
