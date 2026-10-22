@@ -159,15 +159,21 @@ main {
 }
 
 @media print {
+	
+	body {
+        margin-top: -70px;
+    }
+    
 	main {
 		border: none;
 		padding: 0:
-		margin: -8em 0 0 0;
 	}
 
 	body {
-		font-size: 12px;
+		font-size: 14px;
 	}
+    
+}
 
 	
 }
