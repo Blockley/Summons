@@ -115,6 +115,12 @@
   document.getElementById("meeting-date").textContent =
     nextMeeting.toLocaleDateString(undefined, options);
 
+    const meetingDateText = nextMeeting.toLocaleDateString(undefined, options);
+
+  document.title = `Blockley Lodge No.6345 – ${meetingDateText} – Summons`;
+
+  document.getElementById("meeting-date").textContent = meetingDateText;
+
   document.getElementById("booking-deadline").textContent =
     bookingDeadline.toLocaleDateString(undefined, options);
 </script>        
